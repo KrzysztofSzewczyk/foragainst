@@ -1,0 +1,6 @@
+
+{
+    "require": {
+        "filebase/filebase": "^1.0"
+	}
+}
