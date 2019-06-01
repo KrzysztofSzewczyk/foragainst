@@ -9,10 +9,6 @@ $database = new \Filebase\Database([
     'dir' => 'db/argument/'
 ]);
 
-$json = "";
-
-$req_amount = 10;
-$req_offset = 0;
 
 if(!isset($_GET['id'])) {
 	echo "{\"error\": \"ID missing.\"}";
