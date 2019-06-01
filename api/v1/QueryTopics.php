@@ -9,7 +9,7 @@ $database = new \Filebase\Database([
     'dir' => 'db/'
 ]);
 
-$json = "{}";
+$json = "";
 
 $req_amount = 10;
 $req_offset = 0;
@@ -26,5 +26,13 @@ if(isset($_GET['page']))
 	$req_offset = intval($_GET['page']) * $req_amount;
 
 $results = $database->where('title','REGEX',$_GET['query'])->limit($req_amount, $req_offset)->results();
+
+$json .= "{\"result\": [";
+
+foreach($results as &$res)
+	$json .= "{\"title\": \"" . $res['title'] . "\", \"id\": \"" . $res['id'] . "\", \"description\": \"" . $res['description'] . "},";
+
+rtrim($json, ',');
+$json .= "]}";
 
 ?>
