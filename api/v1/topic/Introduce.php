@@ -13,7 +13,7 @@ if(!isset($_POST['title']) &&
 	die;
 }
 
-$id = md5($_POST['title'] . $_POST['description']);
+$id = md5($_POST['title'] . $_POST['description'] . string(random_int()));
 
 $item = $database->get($id);
 $item->title = $_POST['title'];
