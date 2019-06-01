@@ -14,7 +14,7 @@ if(!isset($_POST['type']) &&
 	die;
 }
 
-$id = md5($_POST['type'] . $_POST['content']);
+$id = md5($_POST['type'] . $_POST['content'] . string(random_int()));
 
 $item = $database->get($id);
 $item->isfor = $_POST['type'] == 'for' ? true : false;
@@ -27,6 +27,11 @@ $item->save();
 $topicDatabase = new \Filebase\Database([
     'dir' => 'db/topic/'
 ]);
+
+if(!$database->has($_POST['parent'])) {
+	echo "{\"error\": \"Invalid parent.\"}";
+	die;
+}
 
 $topic = $topicDatabase->get($_POST['parent']);
 $topic->arguments[] = $id;
