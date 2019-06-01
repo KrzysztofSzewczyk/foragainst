@@ -20,6 +20,7 @@ $item->title = $_POST['title'];
 $item->description = $_POST['description'];
 $item->id = $id;
 $item->score = 0;
+$item->arguments = array();
 $item->introduced = false;
 
 $item->save();
