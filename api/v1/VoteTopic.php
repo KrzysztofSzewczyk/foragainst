@@ -25,6 +25,7 @@ $times_executed = 0;
 
 foreach($results as &$res) {
 	$res['score']++;
+	$res->save();
 	$times_executed++;
 }
 

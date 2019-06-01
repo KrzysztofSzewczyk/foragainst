@@ -26,6 +26,7 @@ $times_executed = 0;
 foreach($results as &$res) {
 	if($res['score'] > 10) {
 		$res->introduced = true;
+		$res->save();
 		echo "{\"ok\": \"Topic has been introduced.\"}";
 		die;
 	} else {
