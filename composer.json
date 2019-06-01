@@ -1,5 +1,7 @@
 
 {
+	"name": "foragainst",
+	"description": "Place where discussions happen.",
     "require": {
         "filebase/filebase": "^1.0"
 	}
