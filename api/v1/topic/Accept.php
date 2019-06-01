@@ -14,25 +14,21 @@ if(!isset($_GET['id'])) {
 	die;
 }
 
-$results = $database->where('id','=',$_POST['id'])->andWhere('introduced','=',false)->results();
-
-$times_executed = 0;
-
-foreach($results as &$res) {
-	if($res['score'] > 10) {
-		$res->introduced = true;
-		$res->save();
-		echo "{\"ok\": \"Topic has been introduced.\"}";
-		die;
-	} else {
-		echo "{\"error\": \"Topic needs at least 10 votes to be introduced.\"}";
-		die;
-	}
-	$times_executed++;
+if(!$database->has($_POST['id'])) {
+	echo "{\"error\": \"No such topic.\"}";
+	die;
 }
 
-if($times_executed == 0) {
-	echo "{\"error\": \"No such topic.\"}";
+$result = $database->get($_POST['id']);
+
+if($result['score'] > 10) {
+	$result->introduced = true;
+	$result->save();
+	
+	echo "{\"ok\": \"Topic has been introduced.\"}";
+	die;
+} else {
+	echo "{\"error\": \"Topic needs at least 10 votes to be introduced.\"}";
 	die;
 }
 
