@@ -9,24 +9,23 @@ $database = new \Filebase\Database([
     'dir' => 'db/topic/'
 ]);
 
+
 if(!isset($_GET['id'])) {
 	echo "{\"error\": \"ID missing.\"}";
 	die;
 }
 
-$results = $database->where('id','=',$_POST['id'])->andWhere('introduced','=',false)->results();
-
-$times_executed = 0;
-
-foreach($results as &$res) {
-	$res['score']++;
-	$res->save();
-	$times_executed++;
-}
-
-if($times_executed == 0) {
+if(!$database->has($_POST['id'])) {
 	echo "{\"error\": \"No such topic.\"}";
 	die;
 }
+
+$result = $database->get($_POST['id']);
+
+$result['score']++;
+$result->save();
+
+echo "{\"ok\": \"Vote cast.\"}";
+die;
 
 ?>
