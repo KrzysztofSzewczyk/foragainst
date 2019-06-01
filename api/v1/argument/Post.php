@@ -20,9 +20,8 @@ $item = $database->get($id);
 $item->isfor = $_POST['type'] == 'for' ? true : false;
 $item->content = $_POST['content'];
 $item->id = $id;
+$item->parent = $_POST['parent'];
 $item->score = 0;
-
-$item->save();
 
 $topicDatabase = new \Filebase\Database([
     'dir' => 'db/topic/'
@@ -35,6 +34,9 @@ if(!$database->has($_POST['parent'])) {
 
 $topic = $topicDatabase->get($_POST['parent']);
 $topic->arguments[] = $id;
+
+$item->save();
+$topic->save();
 
 echo "{\"ok\": \"Argument posted.\"}";
 die;
