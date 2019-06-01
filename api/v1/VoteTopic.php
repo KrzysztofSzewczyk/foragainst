@@ -24,14 +24,7 @@ $results = $database->where('id','=',$_POST['id'])->andWhere('introduced','=',fa
 $times_executed = 0;
 
 foreach($results as &$res) {
-	if($res['score'] > 10) {
-		$res->introduced = true;
-		echo "{\"ok\": \"Topic has been introduced.\"}";
-		die;
-	} else {
-		echo "{\"error\": \"Topic needs at least 10 votes to be introduced.\"}";
-		die;
-	}
+	$res['score']++;
 	$times_executed++;
 }
 

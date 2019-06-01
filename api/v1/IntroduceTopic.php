@@ -4,7 +4,7 @@
 require 'vendor/autoload.php';
 
 $database = new \Filebase\Database([
-    'dir' => 'db/'
+    'dir' => 'db/topic/'
 ]);
 
 if(!isset($_POST['title']) && 
