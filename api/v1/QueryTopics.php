@@ -25,7 +25,7 @@ if(isset($_GET['amount']))
 if(isset($_GET['page']))
 	$req_offset = intval($_GET['page']) * $req_amount;
 
-$results = $database->where('title','REGEX',$_GET['query'])->limit($req_amount, $req_offset)->results();
+$results = $database->where('title','REGEX',$_GET['query'])->andWhere('introduced','=',true)->limit($req_amount, $req_offset)->results();
 
 $json .= "{\"result\": [";
 
