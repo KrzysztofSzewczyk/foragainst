@@ -15,22 +15,17 @@ if(!isset($_GET['id'])) {
 	die;
 }
 
-$results = $database->where('id','=',$_POST['id'])->results();
-
-$times_executed = 0;
-
-foreach($results as &$res) {
-	$res['score']++;
-	$res->save();
-	$times_executed++;
-}
-
-if($times_executed == 0) {
+if(!$database->has($_POST['id'])) {
 	echo "{\"error\": \"No such argument.\"}";
 	die;
-} else {
-	echo "{\"ok\": \"Vote cast.\"}";
-	die;
 }
+
+$result = $database->get($_POST['id']);
+
+$result['score']++;
+$result->save();
+
+echo "{\"ok\": \"Vote cast.\"}";
+die;
 
 ?>
