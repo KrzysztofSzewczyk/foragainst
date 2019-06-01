@@ -10,7 +10,7 @@ $database = new \Filebase\Database([
 if(!isset($_POST['type']) && 
    !isset($_POST['content']) &&
    !isset($_POST['parent'])) {
-	echo "{\"error\": \"Type, parent and content missing\"}";
+	echo "{\"error\": \"Type, parent and content missing.\"}";
 	die;
 }
 
@@ -30,5 +30,8 @@ $topicDatabase = new \Filebase\Database([
 
 $topic = $topicDatabase->get($_POST['parent']);
 $topic->arguments[] = $id;
+
+echo "{\"ok\": \"Argument posted.\"}";
+die;
 
 ?>
