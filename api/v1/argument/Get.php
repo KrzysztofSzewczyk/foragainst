@@ -21,9 +21,8 @@ if(!$database->has($_POST['id'])) {
 
 $result = $database->get($_POST['id']);
 
-echo "{\"ispositive\": " . $result->isfor .
-	 ", \"content\": " . $result->content . 
-	 ", \"score\": " . $result->score . "}";
+echo json_encode(array("ispositive" => $result->isfor, "content" => $result->content, "score" => $result->score));
+
 die;
 
 ?>
