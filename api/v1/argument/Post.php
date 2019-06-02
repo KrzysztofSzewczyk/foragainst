@@ -28,7 +28,7 @@ if(!isset($_POST['type']) &&
 	die;
 }
 
-$id = md5($_POST['type'] . $_POST['content'] . string(random_int()));
+$id = md5($_POST['type'] . $_POST['content'] . microtime());
 
 $item = $database->get($id);
 $item->isfor = $_POST['type'] == 'for' ? true : false;

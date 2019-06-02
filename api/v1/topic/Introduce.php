@@ -27,7 +27,7 @@ if(!isset($_POST['title']) &&
 	die;
 }
 
-$id = md5($_POST['title'] . $_POST['description'] . string(random_int()));
+$id = md5($_POST['title'] . $_POST['description'] . microtime());
 
 $item = $database->get($id);
 $item->title = $_POST['title'];
