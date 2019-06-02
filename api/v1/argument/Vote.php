@@ -15,19 +15,19 @@ if (isset($_SESSION['LAST_CALL'])) {
 	$curr = strtotime(date("Y-m-d h:i:s"));
 	$sec = abs($last - $curr);
 	if ($sec <= 300) { // You can post argument every 5 minutes.
-		echo "{\"error\": \"Ratelimit exceeded.\"}";
+		echo json_encode(array("error" => "Ratelimit exceeded."));
 		die;   
 	}
 }
 $_SESSION['LAST_CALL'] = date("Y-m-d h:i:s");
 
 if(!isset($_GET['id'])) {
-	echo "{\"error\": \"ID missing.\"}";
+	echo json_encode(array("error" => "ID missing."));
 	die;
 }
 
 if(!$database->has($_POST['id'])) {
-	echo "{\"error\": \"No such argument.\"}";
+	echo json_encode(array("error" => "No such argument."));
 	die;
 }
 
@@ -36,7 +36,7 @@ $result = $database->get($_POST['id']);
 $result['score']++;
 $result->save();
 
-echo "{\"ok\": \"Vote cast.\"}";
+echo json_encode(array("ok" => "Vote cast."));
 die;
 
 ?>

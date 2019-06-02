@@ -10,12 +10,12 @@ $database = new \Filebase\Database([
 ]);
 
 if(!isset($_GET['id'])) {
-	echo "{\"error\": \"ID missing.\"}";
+	echo json_encode(array("error" => "ID missing."));
 	die;
 }
 
 if(!$database->has($_POST['id'])) {
-	echo "{\"error\": \"No such topic.\"}";
+	echo json_encode(array("error" => "No such topic."));
 	die;
 }
 
@@ -25,10 +25,10 @@ if($result['score'] > 10) {
 	$result->introduced = true;
 	$result->save();
 	
-	echo "{\"ok\": \"Topic has been introduced.\"}";
+	echo json_encode(array("ok" => "Topic has been introduced."));
 	die;
 } else {
-	echo "{\"error\": \"Topic needs at least 10 votes to be introduced.\"}";
+	echo json_encode(array("error" => "Topic needs 10 votes to be introduced."));
 	die;
 }
 
