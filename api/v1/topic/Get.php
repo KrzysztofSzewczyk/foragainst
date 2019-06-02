@@ -6,7 +6,7 @@ require 'vendor/autoload.php';
 header('Content-Type: application/json');
 
 $database = new \Filebase\Database([
-    'dir' => 'db/argument/'
+    'dir' => 'db/topic/'
 ]);
 
 if(!isset($_GET['id'])) {
@@ -15,7 +15,7 @@ if(!isset($_GET['id'])) {
 }
 
 if(!$database->has($_POST['id'])) {
-	echo "{\"error\": \"No such argument.\"}";
+	echo "{\"error\": \"No such topic.\"}";
 	die;
 }
 
