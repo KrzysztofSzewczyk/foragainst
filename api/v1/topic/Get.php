@@ -21,9 +21,10 @@ if(!$database->has($_POST['id'])) {
 
 $result = $database->get($_POST['id']);
 
-echo "{\"ispositive\": " . $result->isfor .
-	 ", \"content\": " . $result->content . 
-	 ", \"score\": " . $result->score . "}";
+echo "{\"title\": " . $result->title .
+	 ", \"description\": " . $result->description . 
+	 ", \"score\": " . $result->score .
+	 ", \"arguments\"" . json_encode($result->arguments) . "}";
 die;
 
 ?>
