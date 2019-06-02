@@ -10,21 +10,18 @@ $database = new \Filebase\Database([
 ]);
 
 if(!isset($_GET['id'])) {
-	echo "{\"error\": \"ID missing.\"}";
+	echo json_encode(array("error" => "ID missing."));
 	die;
 }
 
 if(!$database->has($_POST['id'])) {
-	echo "{\"error\": \"No such topic.\"}";
+	echo json_encode(array("error" => "No such topic."));
 	die;
 }
 
 $result = $database->get($_POST['id']);
 
-echo "{\"title\": " . $result->title .
-	 ", \"description\": " . $result->description . 
-	 ", \"score\": " . $result->score .
-	 ", \"arguments\"" . json_encode($result->arguments) . "}";
+echo json_encode(array("title" => $result->title, "description" => $result->description, "score" => $result->score, "arguments" => json_encode($result->arguments)));
 die;
 
 ?>
