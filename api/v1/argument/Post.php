@@ -13,8 +13,8 @@ if (isset($_SESSION['LAST_CALL'])) {
 	$curr = strtotime(date("Y-m-d h:i:s"));
 	$sec = abs($last - $curr);
 	if ($sec <= 600) { // You can post argument every 10 minutes.
-		echo "{\"error\": \"Ratelimit exceeded.\"}";
-		die;   
+		echo json_encode(array("error" => "Ratelimit exceeded."));
+		die;
 	}
 }
 $_SESSION['LAST_CALL'] = date("Y-m-d h:i:s");
@@ -22,7 +22,7 @@ $_SESSION['LAST_CALL'] = date("Y-m-d h:i:s");
 if(!isset($_POST['type']) && 
    !isset($_POST['content']) &&
    !isset($_POST['parent'])) {
-	echo "{\"error\": \"Type, parent and content missing.\"}";
+	echo json_encode(array("error" => "Type, parent and content missing."));
 	die;
 }
 
@@ -40,7 +40,7 @@ $topicDatabase = new \Filebase\Database([
 ]);
 
 if(!$database->has($_POST['parent'])) {
-	echo "{\"error\": \"Invalid parent.\"}";
+	echo json_encode(array("error" => "Invalid parent."));
 	die;
 }
 
@@ -50,7 +50,7 @@ $topic->arguments[] = $id;
 $item->save();
 $topic->save();
 
-echo "{\"ok\": \"Argument posted.\"}";
+echo json_encode(array("ok" => "Argument posted."));
 die;
 
 ?>
