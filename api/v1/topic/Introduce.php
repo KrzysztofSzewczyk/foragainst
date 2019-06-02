@@ -8,8 +8,8 @@ $database = new \Filebase\Database([
 ]);
 
 session_start();
-if (isset($_SESSION['LAST_CALL'])) {
-	$last = strtotime($_SESSION['LAST_CALL']);
+if (isset($_SESSION['LAST_CALL_TINT'])) {
+	$last = strtotime($_SESSION['LAST_CALL_TINT']);
 	$curr = strtotime(date("Y-m-d h:i:s"));
 	$sec = abs($last - $curr);
 	if ($sec <= 60 * 20) { // You can post argument every 20 minutes.
@@ -18,7 +18,7 @@ if (isset($_SESSION['LAST_CALL'])) {
 		die;   
 	}
 }
-$_SESSION['LAST_CALL'] = date("Y-m-d h:i:s");
+$_SESSION['LAST_CALL_TINT'] = date("Y-m-d h:i:s");
 
 if(!isset($_POST['title']) && 
    !isset($_POST['description'])) {

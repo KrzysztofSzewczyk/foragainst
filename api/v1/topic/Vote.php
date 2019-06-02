@@ -10,8 +10,8 @@ $database = new \Filebase\Database([
 ]);
 
 session_start();
-if (isset($_SESSION['LAST_CALL'])) {
-	$last = strtotime($_SESSION['LAST_CALL']);
+if (isset($_SESSION['LAST_CALL_TV'])) {
+	$last = strtotime($_SESSION['LAST_CALL_TV']);
 	$curr = strtotime(date("Y-m-d h:i:s"));
 	$sec = abs($last - $curr);
 	if ($sec <= 300) { // You can post argument every 5 minutes.
@@ -20,7 +20,7 @@ if (isset($_SESSION['LAST_CALL'])) {
 		die;   
 	}
 }
-$_SESSION['LAST_CALL'] = date("Y-m-d h:i:s");
+$_SESSION['LAST_CALL_TV'] = date("Y-m-d h:i:s");
 
 if(!isset($_GET['id'])) {
 	http_response_code(400); // 400: Bad Request
