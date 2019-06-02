@@ -15,6 +15,7 @@ if (isset($_SESSION['LAST_CALL'])) {
 	$curr = strtotime(date("Y-m-d h:i:s"));
 	$sec = abs($last - $curr);
 	if ($sec <= 300) { // You can post argument every 5 minutes.
+		http_response_code(403); // 403: Forbidden
 		echo json_encode(array("error" => "Ratelimit exceeded."));
 		die;   
 	}
@@ -22,11 +23,13 @@ if (isset($_SESSION['LAST_CALL'])) {
 $_SESSION['LAST_CALL'] = date("Y-m-d h:i:s");
 
 if(!isset($_GET['id'])) {
+	http_response_code(400); // 400: Bad Request
 	echo json_encode(array("error" => "ID missing."));
 	die;
 }
 
 if(!$database->has($_POST['id'])) {
+	http_response_code(404); // 404: Not Found
 	echo json_encode(array("error" => "No such argument."));
 	die;
 }
@@ -36,6 +39,7 @@ $result = $database->get($_POST['id']);
 $result['score']++;
 $result->save();
 
+http_response_code(200); // 200: OK
 echo json_encode(array("ok" => "Vote cast."));
 die;
 

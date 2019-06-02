@@ -13,6 +13,7 @@ if (isset($_SESSION['LAST_CALL'])) {
 	$curr = strtotime(date("Y-m-d h:i:s"));
 	$sec = abs($last - $curr);
 	if ($sec <= 60 * 20) { // You can post argument every 20 minutes.
+		http_response_code(403); // 403: Forbidden
 		echo json_encode(array("error" => "Ratelimit exceeded."));
 		die;   
 	}
@@ -21,6 +22,7 @@ $_SESSION['LAST_CALL'] = date("Y-m-d h:i:s");
 
 if(!isset($_POST['title']) && 
    !isset($_POST['description'])) {
+	http_response_code(400); // 400: Bad Request
 	echo json_encode(array("error" => "Title and description missing."));
 	die;
 }
@@ -36,5 +38,8 @@ $item->arguments = array();
 $item->introduced = false;
 
 $item->save();
+
+http_response_code(201); // 201: Created
+echo json_encode(array("ok" => "Topic introduced."));
 
 ?>

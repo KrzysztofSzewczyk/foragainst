@@ -15,6 +15,7 @@ $req_amount = 10;
 $req_offset = 0;
 
 if(!isset($_GET['query'])) {
+	http_response_code(400); // 400: Bad Request
 	echo json_encode(array("error" => "Query string missing."));
 	die;
 }
@@ -29,6 +30,8 @@ $results = $database->where('title','REGEX',$_GET['query'])->andWhere('introduce
 
 // Note: It seems like generating JSON by hand is the simplest and the most efficent way to do it, yet
 //       there is slight chance I'm wrong. When better workaround comes in place, delete this clusterfuck of code.
+
+http_response_code(200); // 200: OK
 
 $json .= "{\"result\": [";
 
