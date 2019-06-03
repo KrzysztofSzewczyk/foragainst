@@ -31,6 +31,10 @@ a {
     color: #ff3860;
 }
 
+.icon {
+	color: #000000;
+}
+
 .tabs li.is-active a {
     border-bottom-color: #ff3860;
     color: #ff3860;   
