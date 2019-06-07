@@ -71,11 +71,16 @@
 
 						<script>
 							document.getElementById('confirm').onclick = function() {
+								let data = new FormData();
+								data.append('title', document.getElementById('dTopic').innerText);
+								data.append('description', document.getElementById('dTopic').innerText);
+
 								let req = new XMLHttpRequest();
 								req.open('POST', '/api/v1/topic/Introduce.php', true);
 								req.onreadystatechange = function (aEvt) {
 									if (req.readyState == 4) {
 										let obj = JSON.parse(req.responseText);
+										console.log(obj);
 										if(typeof(obj.ok) == 'string') {
 											window.location.replace('topic.html?id=' + obj.id);
 										} else {
@@ -83,7 +88,7 @@
 										}
 									}
 								};
-								req.send(null);
+								req.send(data);
 							};
 						</script>
 					</div>
