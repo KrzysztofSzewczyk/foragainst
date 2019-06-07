@@ -4,7 +4,7 @@
 require '../../../vendor/autoload.php';
 
 $database = new \Filebase\Database([
-    'dir' => 'db/argument/'
+    'dir' => '../../../db/argument/'
 ]);
 
 session_start();

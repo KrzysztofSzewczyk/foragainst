@@ -4,7 +4,7 @@
 require '../../../vendor/autoload.php';
 
 $database = new \Filebase\Database([
-    'dir' => 'db/topic/'
+    'dir' => '../../../db/topic/'
 ]);
 
 session_start();
