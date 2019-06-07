@@ -15,13 +15,13 @@ if(!isset($_GET['id'])) {
 	die;
 }
 
-if(!$database->has($_POST['id'])) {
+if(!$database->has($_GET['id'])) {
 	http_response_code(404); // 404: Not Found
 	echo json_encode(array("error" => "No such topic."));
 	die;
 }
 
-$result = $database->get($_POST['id']);
+$result = $database->get($_GET['id']);
 
 http_response_code(200); // 200: OK
 echo json_encode(array("title" => $result->title, "description" => $result->description, "score" => $result->score, "arguments" => json_encode($result->arguments)));

@@ -1,0 +1,107 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ForAgainst - about</title>
+		<link rel="stylesheet" href="css/bulma.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<div class="hero-head">
+			<header>
+				<div class="container">
+					<div class="section">
+						<div class="has-text-centered">
+							<h1 class="title is-1 is-spaced">ForAgainst</h1>
+							<h4 class="subtitle is-4">place where discussions happen</h4>
+						</div>
+					</div>
+					<div class="section">
+						<div class="tabs is-centered">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="trending.html">Trending</a></li>
+								<li><a href="search.html">Search</a></li>
+								<li><a href="triage.html">Topic triage</a></li>
+								<li class="is-active"><a href="post.html">Post a topic</a></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li><a href="about.html">About</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</header>
+		</div>
+		<div class="hero-body">
+			<div class="container ">
+				<div class="columns is-multiline is-mobile is-centered">
+					<div class="column is-8 is-centered">
+						<div class="header-content">
+							<div class="has-text-centered">
+								<h1 class="title is-spaced">
+									Post a topic
+								</h1>
+							</div>
+						</div>
+
+						<label class="label" id="dErr"></label>
+
+						<div class="column">
+							<form class="box">
+								<div class="field">
+									<label class="label">Title</label>
+									<div class="control has-icons-left">
+										<input id="dTopic" class="input" placeholder="Discussion topic - e.g. Nuclear Power">
+									</div>
+								</div>
+								<div class="field">
+									<label class="label">Description</label>
+									<div class="control has-icons-left">
+										<textarea id="dDesc" class="input" placeholder="Extend a topic a bit - e.g. Using RBMK reactors"></textarea>
+									</div>
+								</div>
+								<div class="field">
+									<button class="button is-success" id="confirm">
+										Post draft
+									</button>
+								</div>
+							</form>
+						</div>
+
+						<script>
+							document.getElementById('confirm').onclick = function() {
+								let req = new XMLHttpRequest();
+								req.open('POST', '/api/v1/topic/Introduce.php', true);
+								req.onreadystatechange = function (aEvt) {
+									if (req.readyState == 4) {
+										let obj = JSON.parse(req.responseText);
+										if(typeof(obj.ok) == 'string') {
+											window.location.replace('topic.html?id=' + obj.id);
+										} else {
+											document.getElementById('dErr').innerText = 'Error: ' + obj.error;
+										}
+									}
+								};
+								req.send(null);
+							};
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-foot footer-custom">
+			<div class="container has-text-centered">
+				<hr/>
+				<a class="nav-item" href="http://github.com/kspalaiologos/foragainst">
+				<span class="icon">
+				<i class="fa fa-github"></i>
+				</span>
+				</a>
+				<p>Did you know, <a href="http://github.com/kspalaiologos/foragainst">foragainst</a> is open-source? We'd love to get your help!</p>
+			</div>
+		</div>
+	</body>
+</html>
+

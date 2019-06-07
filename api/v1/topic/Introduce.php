@@ -40,6 +40,6 @@ $item->introduced = false;
 $item->save();
 
 http_response_code(201); // 201: Created
-echo json_encode(array("ok" => "Topic introduced."));
+echo json_encode(array("ok" => "Topic introduced.", "id" => $id));
 
 ?>
