@@ -1,7 +1,7 @@
 
 <?php
 
-require 'vendor/autoload.php';
+require '../../../vendor/autoload.php';
 
 $database = new \Filebase\Database([
     'dir' => 'db/topic/'
