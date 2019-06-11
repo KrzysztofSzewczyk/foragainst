@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ForAgainst - topic triage</title>
+		<link rel="stylesheet" href="css/bulma.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			.is-vertical-center {
+				display: flex;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="hero-head">
+			<header>
+				<div class="container">
+					<div class="section">
+						<div class="has-text-centered">
+							<h1 class="title is-1 is-spaced">ForAgainst</h1>
+							<h4 class="subtitle is-4">place where discussions happen</h4>
+						</div>
+					</div>
+					<div class="section">
+						<div class="tabs is-centered">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="trending.html">Trending</a></li>
+								<li><a href="search.html">Search</a></li>
+								<li class="is-active"><a href="triage.html">Topic triage</a></li>
+								<li><a href="post.html">Post a topic</a></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li><a href="about.html">About</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</header>
+		</div>
+		<div class="hero-body">
+			<div class="container ">
+				<div class="columns is-multiline is-mobile is-centered">
+					<div class="column is-8 is-centered">
+						<div class="header-content">
+							<div class="has-text-centered">
+								<h1 class="title is-spaced">
+									Topic triage
+								</h1>
+							</div>
+						</div>
+
+						<div class="column">
+							<div class="box columns">
+								<div class="column is-1 has-text-centered is-vertical-center">
+									<a class="button">
+										<span class="icon"><i class="fa fa-arrow-up fa-lg"></i></span>
+									</a>
+								</div>
+								<div class="column is-1 has-text-centered is-vertical-center">
+									<p class="has-text-weight-bold"><b>+8</b></p>
+								</div>
+								<div class="column">
+									<div class="field">
+										<label class="label is-size-3">Nuclear power</label>
+									</div>
+									<div class="field">
+										<p class="is-size-1">Description</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<script>
+							document.getElementById('confirm').onclick = function() {
+								let data = new FormData();
+								data.append('title', document.getElementById('dTopic').innerText);
+								data.append('description', document.getElementById('dTopic').innerText);
+
+								let req = new XMLHttpRequest();
+								req.open('POST', '/api/v1/topic/Introduce.php', true);
+								req.onreadystatechange = function (aEvt) {
+									if (req.readyState == 4) {
+										let obj = JSON.parse(req.responseText);
+										console.log(obj);
+										if(typeof(obj.ok) == 'string') {
+											window.location.replace('topic.html?id=' + obj.id);
+										} else {
+											document.getElementById('dErr').innerText = 'Error: ' + obj.error;
+										}
+									}
+								};
+								req.send(data);
+							};
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-foot footer-custom">
+			<div class="container has-text-centered">
+				<hr/>
+				<a class="nav-item" href="http://github.com/kspalaiologos/foragainst">
+				<span class="icon">
+				<i class="fa fa-github"></i>
+				</span>
+				</a>
+				<p>Did you know, <a href="http://github.com/kspalaiologos/foragainst">foragainst</a> is open-source? We'd love to get your help!</p>
+			</div>
+		</div>
+	</body>
+</html>
+
